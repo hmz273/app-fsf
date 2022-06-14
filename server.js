@@ -12,6 +12,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", require("./Auth/authRoute"));
+app.use("/api/tasks", require("./Task/TaskRoute"));
 
 
 

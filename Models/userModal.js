@@ -10,11 +10,6 @@ const UserSchema = new Mongoose.Schema({
     type: String,
     minlength: 6,
     required: true,
-  },
-  role: {
-    type: String,
-    default: "User",
-    required: true,
   }
 });
 
