@@ -5,7 +5,7 @@ const moment = require('moment');
 exports.createTask = async (req, res, next) => {
     try {
         const { name, type, description, dueDate } = req.body;
-        const formatDate = (date, format = 'YYYY-MM-DD') =>
+        const formatDate = (date, format = 'YYYY-MM-DD HH:mm:ss Z+HHmm') =>
               moment(date).format(format);
         const Date = formatDate(dueDate);
         const { id } = req.params;
@@ -73,76 +73,76 @@ exports.updateTask = async (req, res, next) => {
   }
 }
 
-// exports.removeCarById = async (req, res) => {
-//     const { id } = req.params;
-//     try {
-//       const car = await Car.findByIdAndDelete(id);
-//       if (!car) {
-//         return res.status(404).json({
-//           error: true,
-//           message: 'Car not found',
-//           data: null,
-//         });
-//       }
-//       res.status(200).json({
-//         error: false,
-//         message: 'Car deleted successfully',
-//         car,
-//       });
-//     } catch (error) {
-//       res.status(500).json({
-//         error: false,
-//         message: error.message,
-//         data: null,
-//       });
-//     }
-// };
+exports.removeTaskById = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const task = await Task.findByIdAndDelete(id);
+      if (!task) {
+        return res.status(404).json({
+          error: true,
+          message: 'task not found',
+          data: null,
+        });
+      }
+      res.status(200).json({
+        error: false,
+        message: 'task deleted successfully',
+        task,
+      });
+    } catch (error) {
+      res.status(500).json({
+        error: false,
+        message: error.message,
+        data: null,
+      });
+    }
+};
 
-// exports.getCarById = async (req, res) => {
-//     const { id } = req.params;
-//     try {
-//       const car = await Car.findById(id);
-//       if (!car) {
-//         return res.status(404).json({
-//           error: true,
-//           message: `Cannot find Car with this id ${id}`,
-//           data: null,
-//         });
-//       }
-//       res.status(200).json({
-//         error: false,
-//         message: null,
-//         data: car,
-//       });
-//     } catch (error) {
-//       res.status(500).json({
-//         error: true,
-//         message: error.message,
-//         data: null,
-//       });
-//     }
-// };
+exports.getTaskById = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const task = await Task.findById(id);
+      if (!task) {
+        return res.status(404).json({
+          error: true,
+          message: `Cannot find task with this id ${id}`,
+          data: null,
+        });
+      }
+      res.status(200).json({
+        error: false,
+        message: null,
+        data: task,
+      });
+    } catch (error) {
+      res.status(500).json({
+        error: true,
+        message: error.message,
+        data: null,
+      });
+    }
+};
 
-// exports.getAllCars = async (req, res) => {
-//     try {
-//       const cars = await Car.find()
-//       if (!cars) {
-//         return res.status(404).json({
-//           error: true,
-//           message: 'Cars not found',
-//           data: null,
-//         });
-//       }
-//       res.status(200).json({
-//         error: false,
-//         message: 'Cars retrieved successfully',
-//         data: cars,
-//       });
-//     } catch (error) {
-//       res.status(500).json({
-//         error: true,
-//         message: error.message,
-//         data: null,
-//       });
-//     }
-// };
+exports.getAllTasks = async (req, res) => {
+    try {
+      const tasks = await Task.find()
+      if (!tasks) {
+        return res.status(404).json({
+          error: true,
+          message: 'tasks not found',
+          data: null,
+        });
+      }
+      res.status(200).json({
+        error: false,
+        message: 'tasks retrieved successfully',
+        data: tasks,
+      });
+    } catch (error) {
+      res.status(500).json({
+        error: true,
+        message: error.message,
+        data: null,
+      });
+    }
+};
