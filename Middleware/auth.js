@@ -4,11 +4,19 @@ const jwtSecret =
 
 exports.userAuth = (req, res, next) => {
   const token = req.cookies.token;
-
+  const { id } = req.params;
+  console.log(req.cookies);
   if (token) {
-    jwt.verify(token, jwtSecret, (err) => {
+    jwt.verify(token, jwtSecret, (err, decodedToken) => {
+      console.log(decodedToken);
       if (err) {
         return res.status(401).json({ message: "Not authorized" });
+      } else {
+        if (decodedToken._id !== id ) {
+          return res.status(401).json({ message: "Not authorized" });
+        } else {
+          next();
+        }
       }
     });
   } else {
