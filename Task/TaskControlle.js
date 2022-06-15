@@ -146,3 +146,45 @@ exports.getAllTasks = async (req, res) => {
       });
     }
 };
+
+exports.encourTask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const task = await Task.findByIdAndUpdate(id, {
+      status: 'encour',
+    });
+
+    return res.status(200).json({
+      error: false,
+      message: 'Task encour......',
+      data: task,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: error.message,
+      data: null,
+    });
+  }
+};
+
+exports.doneTask = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const task = await Task.findByIdAndUpdate(id, {
+      status: 'done',
+    });
+
+    return res.status(200).json({
+      error: false,
+      message: 'Task Done',
+      data: task,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: error.message,
+      data: null,
+    });
+  }
+};

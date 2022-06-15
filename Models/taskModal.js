@@ -24,7 +24,11 @@ const TaskSchema = new Mongoose.Schema({
 
   label: {
     type: String,
-    default: 'en progress'
+    default: 'Todo'
+  },
+
+  status: {
+    type: String
   }
 
 });
